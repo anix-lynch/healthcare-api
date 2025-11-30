@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# API
+api/venv/
+api/__pycache__/
+*.pyc
+
+# dbt
+dbt-project/target/
+dbt-project/dbt_packages/
+dbt-project/profiles.yml
+*.log
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (keep structure, but ignore processed/derived data)
+data/processed/
+*.db
+*.duckdb
+# Note: healthcare_dataset.csv is included (it's the foundation dataset)
+
+# ML
+ml-pipeline/mlruns/
+ml-pipeline/models/
+*.pkl
+*.joblib
+
+# Environment variables
+.env
+.env.local
+secrets/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
