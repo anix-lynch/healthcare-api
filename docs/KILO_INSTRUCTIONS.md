@@ -1,10 +1,35 @@
 # Instructions for Kilo Code
 
+## ✅ Setup Status
+
+### Healthcare API
+- **GitHub Repository:** https://github.com/anix-lynch/healthcare-api
+- **Status:** ✅ Deployed and ready
+- **Endpoints:** `/api/encounters`, `/api/patients`, `/api/doctors`, `/api/hospitals`, `/api/stats`, etc.
+- **Documentation:** See `api/README.md` in this project
+- **Usage:** All 3 projects (dbt, Power BI, ML) can consume data from the API instead of CSV
+
+### Microsoft Fabric
+- **Workspace:** HealthcareAnalytics ✅
+- **Workspace ID:** `577de43f-21b4-479e-99b6-ea78f32e5216`
+- **URL:** https://app.fabric.microsoft.com/groups/577de43f-21b4-479e-99b6-ea78f32e5216
+- **Credentials:** `~/.config/secrets/fabric.env`
+- **Access:** Azure CLI authentication working
+- **Note:** No official Fabric MCP server - use REST API with Azure CLI tokens
+
+---
+
 ## 🎯 Mission
 
 Build a production-grade Healthcare Analytics Platform using **ONE unified dataset** as the foundation for all 3 projects:
 
-**Dataset:** `/Users/anixlynch/dev/serpAPI/healthcare-analytics/healthcare_dataset.csv`
+**Dataset Options:**
+1. **Local CSV:** `/Users/anixlynch/dev/healthcare-analytics/data/raw/healthcare_dataset.csv`
+2. **REST API (Recommended):** Healthcare API is deployed on GitHub at `https://github.com/anix-lynch/healthcare-api`
+   - API endpoints: `/api/encounters`, `/api/patients`, `/api/stats`, etc.
+   - No authentication required
+   - Perfect for dbt, Power BI, and ML pipelines
+   - See `api/README.md` for full documentation
 
 ---
 
@@ -40,32 +65,42 @@ Build a production-grade Healthcare Analytics Platform using **ONE unified datas
 2. `PROJECT_SPEC.md` - Original project requirements
 
 **Key Design Principles:**
-- Single source of truth: `healthcare_dataset.csv`
+- **Single source of truth:** Healthcare API (deployed on GitHub: https://github.com/anix-lynch/healthcare-api)
+- **Alternative:** Local CSV at `data/raw/healthcare_dataset.csv`
 - Reusable features for all ML models
 - Extensible for future AI (embeddings, RAG, knowledge graphs)
 - 100% CLI/API - zero GUI
+
+**Important:** The Healthcare REST API is available on GitHub and can be used by all 3 projects (dbt, Power BI, ML) instead of parsing CSV files. See `api/README.md` for API documentation.
 
 ---
 
 ## 🚀 Phase 1: Data Warehouse (START HERE)
 
-### Step 1: Fabric Workspace Setup
+### Step 1: Fabric Workspace Setup ✅ COMPLETE!
 
-**User must do this first:**
-1. Go to https://app.fabric.microsoft.com
-2. Create workspace: "HealthcareAnalytics"
-3. Run: `/Users/anixlynch/dev/serpAPI/fabric_cli_setup_v2.sh`
-4. Get workspace ID
+**Fabric Workspace Already Configured:**
+- **Workspace Name:** HealthcareAnalytics
+- **Workspace ID:** `577de43f-21b4-479e-99b6-ea78f32e5216`
+- **URL:** https://app.fabric.microsoft.com/groups/577de43f-21b4-479e-99b6-ea78f32e5216
+- **Credentials:** Saved in `~/.config/secrets/fabric.env`
 
-**Then you configure MCP connection**
+**Access Fabric via:**
+- **Azure CLI:** `az account get-access-token --resource https://analysis.windows.net/powerbi/api`
+- **REST API Helper:** `./scripts/fabric_api_helper.sh list_workspaces`
+- **Direct API:** Use workspace ID in all Fabric API calls
+
+**Note:** No official Fabric MCP server exists yet, but you can use REST API calls with Azure CLI authentication for all operations.
 
 ### Step 2: Create dbt Project
 
 ```bash
-cd /Users/anixlynch/dev/serpAPI/healthcare-analytics
+cd /Users/anixlynch/dev/healthcare-analytics
 mkdir dbt-project && cd dbt-project
 dbt init healthcare_analytics
 ```
+
+**Project Location:** `/Users/anixlynch/dev/healthcare-analytics/`
 
 **Configure `profiles.yml` for Fabric:**
 ```yaml
@@ -86,8 +121,18 @@ healthcare_analytics:
 
 **File:** `models/staging/stg_healthcare.sql`
 
+**Data Source Options:**
+
+**Option A: Use Healthcare API (Recommended)**
+- API URL: `http://localhost:8000/api/encounters?limit=55500` (if running locally)
+- Or use GitHub API when deployed
+- Fetch via Python/pandas in dbt, or use external table connector
+
+**Option B: Use Local CSV**
+- File: `data/raw/healthcare_dataset.csv`
+- Direct file read in dbt
+
 **Requirements:**
-- Load from `healthcare_dataset.csv`
 - Clean column names (remove spaces, standardize)
 - Type cast dates (Date of Admission, Discharge Date)
 - Generate surrogate key: `encounter_id = hash(Name + Date of Admission)`
@@ -481,11 +526,12 @@ mlflow models serve --model-uri models:/readmission_predictor/production --port 
 
 ## 🔥 Key Principles
 
-1. **Single Source of Truth:** Always use `healthcare_dataset.csv`
-2. **CLI Only:** No GUI clicking (except Fabric workspace creation)
+1. **Single Source of Truth:** Use Healthcare API (GitHub: https://github.com/anix-lynch/healthcare-api) or local CSV
+2. **CLI Only:** No GUI clicking - all via CLI/API
 3. **Reusable Features:** Build once, use everywhere
 4. **Future-Proof:** Design for AI/RAG extensions
 5. **Business Impact:** Always quantify ROI
+6. **Fabric Ready:** Workspace ID `577de43f-21b4-479e-99b6-ea78f32e5216` is configured
 
 ---
 
@@ -505,6 +551,25 @@ mlflow models serve --model-uri models:/readmission_predictor/production --port 
 - TMDL deployment error: Validate relationships, check DAX syntax
 
 ---
+
+---
+
+## 🚀 Quick Start Summary
+
+**You have everything you need:**
+
+1. ✅ **Healthcare API** - Deployed on GitHub (https://github.com/anix-lynch/healthcare-api)
+   - Use API endpoints instead of CSV parsing
+   - All endpoints documented in `api/README.md`
+
+2. ✅ **Fabric Workspace** - HealthcareAnalytics (ID: `577de43f-21b4-479e-99b6-ea78f32e5216`)
+   - Ready for dbt, TMDL, and ML deployment
+   - Access via Azure CLI: `az account get-access-token --resource https://analysis.windows.net/powerbi/api`
+
+3. ✅ **Dataset** - 55,500 patient encounters
+   - Available via API or local CSV: `data/raw/healthcare_dataset.csv`
+
+**Start with Phase 1 (Data Warehouse) and work 100% CLI/API!**
 
 **LET'S BUILD! 🚀**
 
