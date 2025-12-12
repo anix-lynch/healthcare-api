@@ -1,7 +1,6 @@
 WITH source_data AS (
-    -- Placeholder for data source.
-    -- This will either be from the Healthcare API or a local CSV.
-    -- For now, assuming a direct table reference or a macro to fetch from API.
+    -- Source: healthcare_dataset.csv (55,500 patient records)
+    -- Loaded via dbt seed command
     SELECT
         "Name" AS patient_name,
         "Date of Admission" AS date_of_admission,
