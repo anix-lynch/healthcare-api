@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/anixlynch/dev/healthcare-analytics/ml-pipeline/src/mlruns/695480959077994681/cbb95a16f5594f9a8f533649ad704e3e/artifacts
+end_time: 1764530115212
+entry_point_name: ''
+experiment_id: '695480959077994681'
+lifecycle_stage: active
+run_id: cbb95a16f5594f9a8f533649ad704e3e
+run_name: rumbling-zebra-380
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764530113302
+status: 3
+tags: []
+user_id: anixlynch

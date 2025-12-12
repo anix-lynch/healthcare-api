@@ -1,0 +1,22 @@
+artifact_path: file:///Users/anixlynch/dev/healthcare-analytics/ml-pipeline/src/mlruns/695480959077994681/models/m-7739032c96a545d5b69d5692a899a6d4/artifacts
+flavors:
+  python_function:
+    data: model.ubj
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.11.13
+  xgboost:
+    code: null
+    data: model.ubj
+    model_class: xgboost.sklearn.XGBClassifier
+    model_format: ubj
+    xgb_version: 3.1.2
+mlflow_version: 3.6.0
+model_id: m-7739032c96a545d5b69d5692a899a6d4
+model_size_bytes: 163975
+model_uuid: m-7739032c96a545d5b69d5692a899a6d4
+prompts: null
+run_id: cbb95a16f5594f9a8f533649ad704e3e
+utc_time_created: '2025-11-30 19:15:13.509648'

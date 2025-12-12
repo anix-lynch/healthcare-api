@@ -4,9 +4,9 @@
 
 1. **Azure AD App Registration** ✅
    - App Name: `FabricMCPServer`
-   - Client ID: `4b397cfb-270a-4140-92d6-4503733a408f`
-   - Tenant ID: `cd8b1986-ff84-47bf-a254-56ccbb7f0951`
-   - Client Secret: Saved in `~/.config/secrets/fabric.env`
+   - Client ID: `[REDACTED - stored in ~/.config/secrets/fabric.env]`
+   - Tenant ID: `[REDACTED - stored in ~/.config/secrets/fabric.env]`
+   - Client Secret: Saved in `~/.config/secrets/fabric.env` (not in repo)
 
 2. **Fabric Free Trial** ✅
    - Active: 59 days remaining

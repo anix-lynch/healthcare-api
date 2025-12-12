@@ -1,0 +1,10 @@
+artifact_location: file:///Users/anixlynch/dev/healthcare-analytics/ml-pipeline/src/mlruns/695480959077994681/models/m-7739032c96a545d5b69d5692a899a6d4/artifacts
+creation_timestamp: 1764530113496
+experiment_id: '695480959077994681'
+last_updated_timestamp: 1764530115205
+model_id: m-7739032c96a545d5b69d5692a899a6d4
+model_type: null
+name: model
+source_run_id: cbb95a16f5594f9a8f533649ad704e3e
+status: 2
+status_message: null

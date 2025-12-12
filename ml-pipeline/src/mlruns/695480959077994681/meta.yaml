@@ -1,0 +1,6 @@
+artifact_location: file:///Users/anixlynch/dev/healthcare-analytics/ml-pipeline/src/mlruns/695480959077994681
+creation_time: 1764530059832
+experiment_id: '695480959077994681'
+last_update_time: 1764530059832
+lifecycle_stage: active
+name: healthcare-readmission-prediction

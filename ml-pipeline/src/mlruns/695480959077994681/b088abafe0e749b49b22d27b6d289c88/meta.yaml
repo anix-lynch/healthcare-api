@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/anixlynch/dev/healthcare-analytics/ml-pipeline/src/mlruns/695480959077994681/b088abafe0e749b49b22d27b6d289c88/artifacts
+end_time: 1764530060036
+entry_point_name: ''
+experiment_id: '695480959077994681'
+lifecycle_stage: active
+run_id: b088abafe0e749b49b22d27b6d289c88
+run_name: marvelous-ray-35
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764530060007
+status: 4
+tags: []
+user_id: anixlynch
