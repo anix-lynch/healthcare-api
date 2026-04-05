@@ -1,0 +1,112 @@
+{
+  "name": "Lead Enrichment Pipeline",
+  "nodes": [
+    {
+      "name": "HubSpot Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "parameters": {
+        "path": "hubspot-lead",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "Extract Domain",
+      "type": "n8n-nodes-base.code",
+      "parameters": {
+        "jsCode": "const email = $input.item.json.email;\nconst domain = email ? email.split('@')[1] : null;\nreturn { domain, ...$input.item.json };"
+      }
+    },
+    {
+      "name": "Clay Company Enrich",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "https://api.clay.com/v1/enrichment/company",
+        "method": "POST",
+        "authentication": "headerAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "domain",
+              "value": "={{ $json.domain }}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Clay Contact Enrich",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "https://api.clay.com/v1/enrichment/contact",
+        "method": "POST",
+        "authentication": "headerAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "email",
+              "value": "={{ $json.email }}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Update HubSpot Contact",
+      "type": "n8n-nodes-base.hubspot",
+      "parameters": {
+        "operation": "update",
+        "resource": "contact",
+        "contactId": "={{ $('HubSpot Webhook').item.json.id }}",
+        "updateFields": {
+          "company_revenue": "={{ $('Clay Company Enrich').item.json.revenue }}",
+          "num_employees": "={{ $('Clay Company Enrich').item.json.employees }}",
+          "industry": "={{ $('Clay Company Enrich').item.json.industry }}",
+          "phone": "={{ $('Clay Contact Enrich').item.json.phone }}",
+          "linkedin_url": "={{ $('Clay Contact Enrich').item.json.linkedin_url }}"
+        }
+      }
+    },
+    {
+      "name": "Calculate Lead Score",
+      "type": "n8n-nodes-base.code",
+      "parameters": {
+        "jsCode": "const revenue = $('Clay Company Enrich').item.json.revenue || 0;\nconst employees = $('Clay Company Enrich').item.json.employees || 0;\nlet score = 0;\nif (revenue > 1000000) score += 30;\nif (employees > 50) score += 20;\nreturn { score, ...$input.item.json };"
+      }
+    },
+    {
+      "name": "Update Lead Score",
+      "type": "n8n-nodes-base.hubspot",
+      "parameters": {
+        "operation": "update",
+        "resource": "contact",
+        "contactId": "={{ $('HubSpot Webhook').item.json.id }}",
+        "updateFields": {
+          "hs_lead_status": "={{ $('Calculate Lead Score').item.json.score }}"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "HubSpot Webhook": {
+      "main": [[{"node": "Extract Domain"}]]
+    },
+    "Extract Domain": {
+      "main": [[{"node": "Clay Company Enrich"}, {"node": "Clay Contact Enrich"}]]
+    },
+    "Clay Company Enrich": {
+      "main": [[{"node": "Update HubSpot Contact"}, {"node": "Calculate Lead Score"}]]
+    },
+    "Clay Contact Enrich": {
+      "main": [[{"node": "Update HubSpot Contact"}]]
+    },
+    "Calculate Lead Score": {
+      "main": [[{"node": "Update Lead Score"}]]
+    }
+  }
+}
+
+
+
+

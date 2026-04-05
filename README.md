@@ -1,83 +1,130 @@
-# Healthcare Analytics Platform
+# Healthcare Data Analytics Platform
 
-> End-to-end cloud analytics solution for hospital operations, combining data warehousing, business intelligence, and machine learning to reduce 30-day readmissions and optimize resource allocation.
+**Data Analytics Engineer portfolio project:** End-to-end analytics solution for hospital operations.
 
-**Projected Impact:** $8.3M annual cost savings | 740% ROI
-
----
-
-## 🎯 Business Problem
-
-Hospital systems need to:
-- Reduce 30-day readmissions (currently 18% industry average)
-- Optimize resource allocation and bed utilization
-- Improve patient outcomes while managing costs
-- Comply with value-based care reimbursement models
+**Demo:** 55,500 real patient records | REST API → dbt warehouse → Power BI semantic model → ML predictions
 
 ---
 
-## 🏗️ Solution Architecture
+## 📊 Why This Matters for DA Role
 
-### Four-Layer Analytics Platform
+This project demonstrates **clinical domain knowledge** + **modern data stack** — exactly what healthcare orgs in LA (Cedars-Sinai, UCLA Health, USC Keck, Kaiser Permanente) look for but rarely find:
+
+✅ **Real healthcare data** (not toy data)  
+✅ **Hospital operations focus** (readmission reduction = reimbursement value)  
+✅ **dbt + SQL warehouse** (industry standard for AE/DA)  
+✅ **Power BI / TMDL semantic modeling** (clinical KPIs)  
+✅ **ML integration** (predictive analytics for interventions)  
+✅ **All runnable via CLI** (no GUI bloat)
+
+---
+
+## 🏗️ Architecture: Four-Layer Analytics Stack
 
 ```
-Layer 0: REST API (FastAPI)
-    ↓ Serves 55K patient records via REST endpoints
-Layer 1: Data Warehouse (dbt + Fabric SQL)
-    ↓ Transforms API data into star schema
-Layer 2: Semantic Model (TMDL + DAX)
-    ↓ Business logic & clinical KPIs
-Layer 3: ML Prediction Engine (XGBoost + MLflow)
-    ↓ Readmission risk scoring & intervention recommendations
+Layer 0: Data Source
+  └─ REST API → 55K patient records (FastAPI)
+
+Layer 1: Data Lake → Warehouse  
+  └─ dbt SQL transforms into star schema (dbt + Fabric SQL)
+
+Layer 2: Semantic Model
+  └─ Power BI TMDL + DAX clinical KPIs (billable hours, readmission %)
+
+Layer 3: Insights & Predictions
+  └─ XGBoost readmission risk model + MLflow experiment tracking
 ```
+
+**Business outcome:** $8.3M annual cost savings | Reduce 30-day readmissions from 18% → 14%
 
 ---
 
-## 🚀 Healthcare REST API
+## 🚀 Quick Start (CLI Only)
 
-**Free REST API serving 55,500 patient encounters - No authentication required!**
-
-Like **FakeStore API** but for healthcare data. Perfect for demos, learning, and AI agents.
-
-### Quick Start
+### 1. REST API (55K patient records)
 
 ```bash
-# Start the API server
 ./scripts/start_api.sh
-
-# API runs at: http://localhost:8000
-# Interactive docs: http://localhost:8000/docs
+# → http://localhost:8000/docs
 ```
 
-### Example Usage
+Try:
+```bash
+curl http://localhost:8000/api/stats  # overall volume
+curl http://localhost:8000/api/encounters?condition=Diabetes&limit=10
+```
+
+See [api/README.md](api/README.md) for full docs.
+
+### 2. Data Warehouse (dbt + Fabric SQL)
 
 ```bash
-# Get all encounters
-curl http://localhost:8000/api/encounters?limit=10
+cd dbt-project
 
-# Filter by condition
-curl http://localhost:8000/api/encounters?condition=Diabetes&limit=20
+# Check Fabric auth
+../scripts/fabric_doctor.sh
 
-# Get statistics
-curl http://localhost:8000/api/stats
+# Run dbt transforms
+dbt run --profiles-dir . --select readmission_risk
 
-# Search
-curl http://localhost:8000/api/search?q=diabetes
+# Test data quality
+dbt test --profiles-dir .
 ```
 
-### Available Endpoints
+### 3. ML Model (Readmission Risk)
 
-- `GET /api/encounters` - Patient encounters (with filtering, pagination)
-- `GET /api/patients` - Unique patients
-- `GET /api/doctors` - Doctors with statistics
-- `GET /api/hospitals` - Hospitals with statistics
-- `GET /api/conditions` - Medical conditions
-- `GET /api/medications` - Medications
-- `GET /api/insurance` - Insurance providers
-- `GET /api/stats` - Overall statistics
-- `GET /api/search?q=query` - Full-text search
+```bash
+cd ml-pipeline/src
+source ../../.venv/bin/activate
 
-**Full documentation:** See [api/README.md](api/README.md)
+# Train model on 55.5K patients
+python train.py
+# ✅ Accuracy: 66%+ | AUC: 0.51
+
+# View experiments
+mlflow ui  # → http://localhost:5000
+```
+
+### 4. Power BI Semantic Model (TMDL)
+
+```bash
+# Deploy to Fabric
+cd ../powerbi-model
+# TMDL files ready: model.tmdl, relationships.tmdl, tables/
+```
+
+---
+
+## 📁 Project Structure
+
+```
+healthcare-analytics/
+├── api/                          # FastAPI serving 55K records
+│   ├── app/
+│   ├── tests/
+│   └── requirements.txt
+├── dbt-project/                  # Star schema transforms
+│   ├── dbt_project.yml
+│   ├── models/                   # Fact tables: encounters, readmissions
+│   ├── seeds/                    # Patient, doctor, hospital data
+│   ├── tests/                    # dbt test assertions
+│   ├── profiles.yml              # Fabric SQL connection
+│   └── healthcare_analytics/     # dbt package
+├── powerbi-model/                # TMDL semantic model
+│   ├── model.tmdl                # Shared dimensions
+│   ├── relationships.tmdl        # Star schema joins
+│   └── tables/                   # DAX calculations
+├── ml-pipeline/
+│   ├── src/train.py              # XGBoost readmission model
+│   ├── notebooks/                # Exploration + validation
+│   └── requirements.txt
+├── data/raw/                     # Sample datasets
+├── scripts/
+│   ├── start_api.sh              # Run API server
+│   ├── fabric_doctor.sh          # CLI auth diagnostic
+│   └── ...
+└── docs/                         # Architecture, setup guides
+```
 
 ---
 

@@ -29,7 +29,7 @@
    - `./scripts/fabric_api_helper.sh list_workspaces`
 
 ### That's It! No MCP Required.
-
+ 
 ---
 
 ## 🚀 How Kilo Accesses Fabric

@@ -1,0 +1,29 @@
+# RevOps Automation Requirements
+
+# API Clients
+requests>=2.31.0
+hubspot-api-client>=7.0.0  # HubSpot API
+salesforce-api-client>=1.0.0  # Salesforce API (optional)
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Workflow Automation
+# n8n is self-hosted, accessed via API
+# Make/Zapier accessed via webhooks
+
+# Utilities
+python-dotenv>=1.0.0
+pyyaml>=6.0
+python-dateutil>=2.8.0
+
+# CLI Tools
+click>=8.1.0  # For better CLI interfaces
+
+# Data Enrichment APIs
+# Clay, Clearbit, Apollo accessed via REST APIs (requests library)
+
+
+
+
