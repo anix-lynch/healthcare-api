@@ -6,6 +6,83 @@
 
 ---
 
+---
+
+## Repository structure
+
+```
+healthcare-api/
+├── api/
+│   ├── app/
+│   │   └── main.py
+│   ├── examples.py
+│   ├── README.md
+│   ├── requirements.txt
+│   └── test_api.py
+├── dbt-project/
+│   ├── analyses/
+│   │   └── .gitkeep
+│   ├── healthcare_analytics/
+│   │   ├── tests/
+│   │   └── .gitignore
+│   ├── macros/
+│   │   └── .gitkeep
+│   ├── models/
+│   │   ├── intermediate/
+│   │   ├── marts/
+│   │   └── staging/
+│   ├── seeds/
+│   │   └── .gitkeep
+│   ├── snapshots/
+│   │   └── .gitkeep
+│   ├── tests/
+│   │   ├── assert_discharge_after_admission.sql
+│   │   ├── assert_no_negative_los.sql
+│   │   └── assert_valid_readmission_logic.sql
+│   ├── .user.yml
+│   ├── dbt_project.yml
+│   ├── package-lock.yml
+│   ├── packages.yml
+│   └── README.md
+├── docs/
+│   ├── BUILD_COMPLETE.md
+│   ├── CURRENT_STATUS.md
+│   ├── FABRIC_ACCESS_FOR_KILO.md
+│   ├── FABRIC_SETUP_FIX.md
+│   ├── FABRIC_SETUP_STATUS.md
+│   ├── KILO_INSTRUCTIONS.md
+│   ├── PROGRESS_UPDATE.md
+│   ├── PROJECT_SPEC.md
+│   ├── UNIFIED_ARCHITECTURE.md
+│   └── WORKSPACE_SETTINGS_GUIDE.md
+├── ml-pipeline/
+│   ├── src/
+│   │   ├── mlruns/
+│   │   ├── score.py
+│   │   └── train.py
+│   └── requirements.txt
+├── powerbi-model/
+│   ├── tables/
+│   │   ├── Date.tmdl
+│   │   ├── Doctor.tmdl
+│   │   ├── Hospital.tmdl
+│   │   ├── Patient Encounters.tmdl
+│   │   └── Patient.tmdl
+│   ├── model.tmdl
+│   └── relationships.tmdl
+├── scripts/
+│   ├── fabric_api_helper.sh
+│   ├── fabric_doctor.sh
+│   ├── get_fabric_info.py
+│   ├── resume-proof-verification.sh
+│   └── start_api.sh
+├── .gitignore
+├── project-spec.md
+├── QUICKSTART.md
+├── README.md
+└── REPO_CHECKLIST.md
+```
+
 ## 📊 Why This Matters for DA Role
 
 This project demonstrates **clinical domain knowledge** + **modern data stack** — exactly what healthcare orgs in LA (Cedars-Sinai, UCLA Health, USC Keck, Kaiser Permanente) look for but rarely find:
