@@ -396,7 +396,6 @@ ROI: 740%
 - **[PROJECT_SPEC.md](docs/PROJECT_SPEC.md)** - Original project requirements
   - Business context
   - Portfolio objectives
-  - Resume bullet points
 
 - **[KILO_INSTRUCTIONS.md](docs/KILO_INSTRUCTIONS.md)** - Step-by-step build guide
   - Phase 1: Data Warehouse
@@ -568,4 +567,3 @@ Dataset: CC0-1.0 (Public Domain) - Synthetic healthcare data from Kaggle
 - Workspace: https://app.fabric.microsoft.com/groups/577de43f-21b4-479e-99b6-ea78f32e5216
 
 Last Updated: December 8, 2025
-

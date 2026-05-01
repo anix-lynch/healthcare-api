@@ -207,7 +207,3 @@
 ---
 
 **Bottom Line:** ~80-85% of this role can be automated, freeing up time for strategic work, creative testing, and stakeholder management.
-
-
-
-
