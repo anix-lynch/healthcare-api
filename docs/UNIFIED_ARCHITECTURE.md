@@ -1,6 +1,6 @@
 # Healthcare Analytics - Unified Foundation Architecture
 
-## 🎯 Strategic Vision
+##  Strategic Vision
 
 **Single Source of Truth:** `/Users/anixlynch/dev/serpAPI/healthcare-analytics/healthcare_dataset.csv`
 
@@ -12,7 +12,7 @@ This dataset powers ALL current and future healthcare data projects:
 
 ---
 
-## 📊 Dataset Profile
+##  Dataset Profile
 
 ### Core Statistics
 - **Records:** 55,500 patient encounters
@@ -573,7 +573,7 @@ WHERE admission_date > (SELECT MAX(admission_date) FROM {{ this }})
 
 ---
 
-## 🎯 ML Pipeline Architecture
+##  ML Pipeline Architecture
 
 ### Feature Store Design
 
@@ -739,7 +739,7 @@ class ReadmissionPredictor:
 
 ---
 
-## 🚀 Future AI/RAG Extensions (Baymaxverse Ready)
+##  Future AI/RAG Extensions (Baymaxverse Ready)
 
 ### 1. Patient Similarity Search (Vector Embeddings)
 
@@ -1061,7 +1061,7 @@ healthcare-analytics/
 
 ---
 
-## 🎯 Success Metrics
+##  Success Metrics
 
 ### Technical Metrics
 - dbt models: 100% build success, 0 test failures
@@ -1083,7 +1083,7 @@ healthcare-analytics/
 
 ---
 
-## 🚀 Deployment Strategy
+##  Deployment Strategy
 
 ### Phase 1: Local Development (Weeks 1-4)
 - Build dbt models locally (DuckDB)
@@ -1132,8 +1132,8 @@ By building this unified platform, you demonstrate:
 4. **Future-Ready Thinking:** AI/RAG extensibility, knowledge graphs
 5. **Business Impact:** Quantified ROI ($8.3M savings)
 
-**This portfolio opens doors to $89K-$116K healthcare data roles!** 🏥💰
+**This portfolio opens doors to $89K-$116K healthcare data roles!** 🏥
 
 ---
 
-**Built entirely via CLI/API. Zero GUI. Maximum reusability.** 🔥
+**Built entirely via CLI/API. Zero GUI. Maximum reusability.**

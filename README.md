@@ -83,7 +83,7 @@ healthcare-api/
 └── REPO_CHECKLIST.md
 ```
 
-## 📊 Why This Matters for DA Role
+##  Why This Matters for DA Role
 
 This project demonstrates **clinical domain knowledge** + **modern data stack** — exactly what healthcare orgs in LA (Cedars-Sinai, UCLA Health, USC Keck, Kaiser Permanente) look for but rarely find:
 
@@ -116,7 +116,7 @@ Layer 3: Insights & Predictions
 
 ---
 
-## 🚀 Quick Start (CLI Only)
+##  Quick Start (CLI Only)
 
 ### 1. REST API (55K patient records)
 
@@ -205,7 +205,7 @@ healthcare-analytics/
 
 ---
 
-## 📊 Dataset
+##  Dataset
 
 **Source:** Healthcare Dataset (55,500 patient encounters)
 - **Time Period:** 2019-2024 (5 years)
@@ -263,7 +263,7 @@ healthcare-analytics/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -330,7 +330,7 @@ dbt test
 
 ---
 
-## 💰 Business Impact
+##  Business Impact
 
 ### Cost Savings Calculation
 
@@ -404,7 +404,7 @@ ROI: 740%
 
 ---
 
-## 🎯 Skills Demonstrated
+##  Skills Demonstrated
 
 ### Data Engineering
 - Dimensional modeling (star schema)
@@ -446,7 +446,7 @@ This portfolio is optimized for:
 
 ---
 
-## 📊 Current Status
+##  Current Status
 
 **Phase 0: REST API** ✅ **COMPLETE!**
 - [x] FastAPI server built
@@ -503,7 +503,7 @@ This portfolio is optimized for:
 
 ---
 
-## 🚀 Roadmap
+##  Roadmap
 
 ### Current Projects (Weeks 1-8)
 1. ✅ Data Warehouse (dbt + Fabric SQL)
@@ -546,7 +546,7 @@ Dataset: CC0-1.0 (Public Domain) - Synthetic healthcare data from Kaggle
 
 ---
 
-**Built entirely via CLI/API - Zero GUI! 🔥**
+**Built entirely via CLI/API - Zero GUI! **
 
 ## 🎉 Project Status: 100% Complete!
 

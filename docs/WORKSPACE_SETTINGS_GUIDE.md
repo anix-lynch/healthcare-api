@@ -128,4 +128,4 @@ And I'll guide you from there!
 
 ---
 
-**Next:** Once capacity is assigned, create the warehouse and we're ready to deploy! 🚀
+**Next:** Once capacity is assigned, create the warehouse and we're ready to deploy!

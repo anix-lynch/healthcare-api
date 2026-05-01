@@ -6,7 +6,7 @@ Like **FakeStore API** but for healthcare data - perfect for demos, learning, pr
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Install & Run
 
@@ -99,7 +99,7 @@ GET /api/search?q=diabetes&limit=20
 
 ---
 
-## 📊 Example Response
+##  Example Response
 
 ### GET /api/encounters?limit=2
 
@@ -152,7 +152,7 @@ GET /api/search?q=diabetes&limit=20
 
 ---
 
-## 🎯 Use Cases
+##  Use Cases
 
 ### 1. Data Analysis & Visualization
 ```python
@@ -212,7 +212,7 @@ healthcare_api = Tool(
 
 ---
 
-## 🔥 Features
+##  Features
 
 - ✅ **No Authentication Required** - Just call the endpoint!
 - ✅ **55,500 Patient Encounters** - Realistic synthetic data

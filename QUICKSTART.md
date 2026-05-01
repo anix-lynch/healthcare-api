@@ -60,7 +60,7 @@ This will tell you:
 
 ---
 
-## 📊 What's Running
+##  What's Running
 
 - **API:** 55K patient records, searchable
 - **dbt:** Star schema (patients, encounters, readmissions)
@@ -69,7 +69,7 @@ This will tell you:
 
 ---
 
-## 🎯 For Demos
+##  For Demos
 
 ```bash
 # Get patient stats
@@ -101,7 +101,7 @@ dbt test
 - `docs/FABRIC_SETUP_FIX.md` - Capacity fix guide
 - `docs/CURRENT_STATUS.md` - Detailed status
 
-## 🎯 Status
+##  Status
 - **Code:** 100% complete
 - **Tested:** ML ✅, API ✅, dbt ⏳ (waiting on Fabric)
 - **Deployed:** 50% (API + ML working, dbt + TMDL waiting on capacity)
