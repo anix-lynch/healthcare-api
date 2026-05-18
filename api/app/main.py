@@ -6,12 +6,22 @@ Author: Anix Lynch
 Dataset: 55,500 patient encounters (2019-2024)
 """
 
-from fastapi import FastAPI, Query, HTTPException
+from fastapi import FastAPI, Query, HTTPException, Body
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional, List
 import pandas as pd
 from datetime import datetime
 import os
+
+try:
+    from .retrieval import get_retriever
+    from .classifier import classify_esi
+except ImportError:
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from retrieval import get_retriever  # type: ignore
+    from classifier import classify_esi  # type: ignore
 
 # Initialize FastAPI
 app = FastAPI(
@@ -373,6 +383,38 @@ def search(
         "count": len(results),
         "data": results
     }
+
+
+# ─────────────────────────────────────────────────────────────────────
+# L1 substrate → 2-chef demo (added 2026-05-18)
+# ─────────────────────────────────────────────────────────────────────
+# healthcare-api is the L1 substrate that future role lanes fork from.
+# These two endpoints demonstrate, AT THE SUBSTRATE LEVEL, that the L1
+# corpus + safety criteria can feed BOTH a retrieval chef AND a
+# classification chef. Forkers see the pattern immediately.
+
+@app.get("/api/retrieve")
+async def retrieve(
+    q: str = Query(..., description="Query text (free-form clinical)"),
+    k: int = Query(5, ge=1, le=20),
+):
+    """BM25 retrieval over the L1 enriched corpus
+    (data/raw/enriched_use_397.jsonl). Returns top-K matches."""
+    return {
+        "query": q,
+        "k": k,
+        "method": "bm25_okapi",
+        "corpus": "enriched_use_397.jsonl",
+        "results": get_retriever().search(q, k=k),
+    }
+
+
+@app.post("/api/classify")
+async def classify(payload: dict = Body(...)):
+    """Rule-based ESI triage with the 10 customer-signed acceptance
+    criteria from data/quality/esi_eval_dataset.json. Input:
+    {age, chief_complaint, vitals:{...}}."""
+    return classify_esi(payload)
 
 
 if __name__ == "__main__":
